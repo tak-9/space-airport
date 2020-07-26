@@ -1,0 +1,1 @@
+	CREATE DATABASE space_airport;

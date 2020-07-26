@@ -21,7 +21,10 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
+    // Fix due to a bug in Sequelize. 
+    // https://stackoverflow.com/questions/47080727/error-on-sequelize-import-definecall-is-not-a-function
+    //const model = sequelize['import'](path.join(__dirname, file));
+    var model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
