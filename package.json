@@ -1,0 +1,29 @@
+{
+  "name": "space-airport",
+  "version": "1.0.0",
+  "description": "Space Airport",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "if-env": "^1.0.4",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7",
+    "sequelize": "^6.3.3",
+    "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "author": "Takuji Okubo",
+  "license": "ISC"
+}
