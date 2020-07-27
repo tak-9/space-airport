@@ -57,6 +57,15 @@ function SpaceAirport() {
         }
     }
 
+    // Execute Search when Enter Key pressed in input box. 
+    const handleKeyPress = (e, id) => {
+        if (!buttonDisable) {
+            if (e.key === "Enter") {
+                landingButtonHandler(id);
+            }
+        }
+    }
+
     return (
         <Row className="controller">
             <Col xs="12" lg="3" className="capsules-section">
@@ -72,6 +81,7 @@ function SpaceAirport() {
                     type="text" 
                     maxLength="15"
                     onChange={e => handleLandingPadIDInput(e.target.value)}
+                    onKeyPress={e => handleKeyPress(e, e.target.value)}
                     value={landingPadId}
                 />
             </Col>
