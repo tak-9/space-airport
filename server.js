@@ -22,8 +22,8 @@ app.get("*", (req, res) => {
 });
 
 
-//db.sequelize.sync({force:true})
-db.sequelize.sync({})
+//db.sequelize.sync({})
+db.sequelize.sync({force:true})
 .then(function() {
     app.listen(PORT, async function() {
         console.log("==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
