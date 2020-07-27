@@ -1,9 +1,14 @@
 import React from 'react';
+import SpaceAirport from './pages/SpaceAirport'
 
 function App() {
-  return (
-    <h1>Hello World!</h1>
-  );
+    return (
+        <>
+            <div className="top-space"></div>
+                <SpaceAirport/>
+            <div className="bottom-space" />
+        </>
+    );
 }
 
 export default App;
