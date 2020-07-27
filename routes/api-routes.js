@@ -127,8 +127,6 @@ var sortDate = function(data) {
     let sortedData = data.sort(function(a,b){
         let capsuleA = a.original_launch_unix;
         let capsuleB = b.original_launch_unix;
-        console.log("capsuleA", a, capsuleA);
-        console.log("capsuleB", b, capsuleB);
         if (capsuleA < capsuleB){
             return 1;
         } else if (capsuleA > capsuleB){

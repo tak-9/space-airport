@@ -7,7 +7,7 @@ function SpaceDataProvider(props) {
     const [spaceData, setSpaceData] = useState();
 
     const setSpaceDataState = (data) => {
-        console.log("*** setSpaceData(data) ***" , data);
+        // console.log("*** setSpaceData(data) ***" , data);
         setSpaceData(data);
     }
 
