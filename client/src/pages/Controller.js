@@ -7,8 +7,9 @@ import { SpaceDataContext } from '../contexts/SpaceDataContext';
 function SpaceAirport() {
 
     let spaceDataCtx = useContext(SpaceDataContext);
-    let { spaceData, setSpaceDataState } = spaceDataCtx;
+    let { setSpaceDataState } = spaceDataCtx;
     const [landingPadId, setLandingPadId] = useState('');
+    const [buttonDisable, setButtonDisabled] = useState(true);
 
     const capsulesButtonHandler = () => {
         const url = "/api/capsules";
@@ -33,9 +34,24 @@ function SpaceAirport() {
     }
 
     const handleLandingPadIDInput = (id) => {
+        // Disable Landing Pad button if input box is empty
+        if (!id || id.length === 0) {
+            setButtonDisabled(true);
+        } else { 
+            // Reset Landing Pad button state (Disabled/Enabled)
+            setButtonDisabled(false);
+        }
+
         setLandingPadId(id);
-        // TODO: add validation. 
-        // Disable button when [‘#’,’$’,’%’,’&’] are entered. 
+
+        // Disable button when one of these character is entered. 
+        const invalidChars = ['#', '$', '%', '&'] ;
+        for (let i=0; i<invalidChars.length; i++){
+            if (id.includes(invalidChars[i])) {
+                setButtonDisabled(true);
+                break;
+            }
+        }
     }
 
     return (
@@ -58,7 +74,7 @@ function SpaceAirport() {
                     />
                 </Col>
                 <Col xs="12" lg="3" className="landing-pad-button-section">
-                    <Button onClick={landingButtonHandler}>
+                    <Button onClick={landingButtonHandler} disabled={buttonDisable} >
                         Landing Pad
                     </Button>
                 </Col>
