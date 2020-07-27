@@ -21,9 +21,8 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-
-//db.sequelize.sync({})
-db.sequelize.sync({force:true})
+//db.sequelize.sync({force:true})
+db.sequelize.sync({})
 .then(function() {
     app.listen(PORT, async function() {
         console.log("==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
