@@ -15,37 +15,40 @@ function SpaceAirport() {
         const url = "/api/capsules";
         axios.get(url)
         .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             setSpaceDataState(res.data);
+        })
+        .catch(err => { 
+            setSpaceDataState(err.response);
         });
-        // TODO: add .catch()
-        // Display error message in console.
     }
 
     const landingButtonHandler = () => {
         const url = "/api/landpad/" + landingPadId ;
         axios.get(url)
         .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             setSpaceDataState(res.data);
+        })
+        .catch(err => { 
+            setSpaceDataState(err.response);
         });
-        // TODO: add .catch()
-        // Display error message in console.
     }
 
     const handleLandingPadIDInput = (id) => {
-        // Disable Landing Pad button if input box is empty
         if (!id || id.length === 0) {
+            // Disable Landing Pad button if input box is empty
             setButtonDisabled(true);
         } else { 
             // Reset Landing Pad button state (Disabled/Enabled)
             setButtonDisabled(false);
         }
 
+        // Set textinput to react State
         setLandingPadId(id);
 
-        // Disable button when one of these character is entered. 
-        const invalidChars = ['#', '$', '%', '&'] ;
+        // Disable button when one of these characters is entered. 
+        const invalidChars = ['#', '$', '%', '&'];
         for (let i=0; i<invalidChars.length; i++){
             if (id.includes(invalidChars[i])) {
                 setButtonDisabled(true);
@@ -55,31 +58,29 @@ function SpaceAirport() {
     }
 
     return (
-        <>
-            <Row className="controller">
-                <Col xs="12" lg="3" className="capsules-section">
-                    <Button onClick={capsulesButtonHandler}>
-                        Capsules
-                    </Button>
-                </Col>
-                <Col xs="12" lg="3" className="logo-section">
-                    <RocketLogo />
-                </Col>
-                <Col xs="12" lg="3" className="landing-pad-input-section">
-                    <Input 
-                        type="text" 
-                        maxLength="15"
-                        onChange={e => handleLandingPadIDInput(e.target.value)}
-                        value={landingPadId}
-                    />
-                </Col>
-                <Col xs="12" lg="3" className="landing-pad-button-section">
-                    <Button onClick={landingButtonHandler} disabled={buttonDisable} >
-                        Landing Pad
-                    </Button>
-                </Col>
-            </Row>
-        </>
+        <Row className="controller">
+            <Col xs="12" lg="3" className="capsules-section">
+                <Button onClick={capsulesButtonHandler}>
+                    Capsules
+                </Button>
+            </Col>
+            <Col xs="12" lg="3" className="logo-section">
+                <RocketLogo />
+            </Col>
+            <Col xs="12" lg="3" className="landing-pad-input-section">
+                <Input 
+                    type="text" 
+                    maxLength="15"
+                    onChange={e => handleLandingPadIDInput(e.target.value)}
+                    value={landingPadId}
+                />
+            </Col>
+            <Col xs="12" lg="3" className="landing-pad-button-section">
+                <Button onClick={landingButtonHandler} disabled={buttonDisable} >
+                    Landing Pad
+                </Button>
+            </Col>
+        </Row>
     );
 }
 
