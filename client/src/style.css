@@ -5,6 +5,10 @@ html, body, #root {
     background-color: #003366;
 }
 
+pre {
+    color: yellow;
+}
+
 @media (min-width: 992px){
     .top-space { 
         height: 25vh;
