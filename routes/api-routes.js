@@ -43,25 +43,27 @@ module.exports = function (app) {
             "WHERE la.id = '" + id + "';"
 
         console.log(sqlStr);
-        let dataFound = false;
+        let skipSpacexAPI = false;
         await db.sequelize.query(sqlStr, {type: db.sequelize.QueryTypes.SELECT})
         .then(function (results) {
             console.log("results", results);
             if (results.length === 0) {
                 // Not Found in Cache 
-                dataFound = false;
+                skipSpacexAPI = false;
             } else { 
                 // Returns data if it's found in Cache. 
-                dataFound = true;
-                res.json(results);
+                skipSpacexAPI = true;
+                res.json(results[0]);
             }
         })
         .catch(function (err) {
             console.log("catch get", err);
             res.status(400).json({ "msg": "Error in checking cache." });
+            skipSpacexAPI = true;
+            return;
         });
     
-        if (dataFound) {
+        if (skipSpacexAPI) {
             // Finish if data is already found in Cache.
             return;
         } else {
